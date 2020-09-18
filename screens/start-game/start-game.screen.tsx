@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet, Text, TextInput, Button } from 'react-native';
+import Card from '../../components/card/card.component';
 
 export interface StartGameScreenProps {}
 
@@ -7,14 +8,14 @@ const StartGameScreen: React.FunctionComponent<StartGameScreenProps> = () => {
 	return (
 		<View style={styles.screen}>
 			<Text style={styles.title}>Start a New Game!</Text>
-			<View style={styles.inputsContainer}>
+			<Card passedStyles={styles.inputsContainer}>
 				<Text>Select a Number</Text>
 				<TextInput />
 				<View style={styles.buttonsContainer}>
 					<Button title='Reset' onPress={() => {}} />
 					<Button title='Confirm' onPress={() => {}} />
 				</View>
-			</View>
+			</Card>
 		</View>
 	);
 };
@@ -30,22 +31,14 @@ const styles = StyleSheet.create({
 		marginVertical: 10,
 	},
 	inputsContainer: {
-		width: 300,
+		width: 200,
 		maxWidth: '80%',
 		alignItems: 'center',
-		shadowColor: 'black',
-		shadowOffset: { width: 0, height: 2 },
-		shadowRadius: 6,
-		shadowOpacity: 0.26,
-		elevation: 5,
-		backgroundColor: 'white',
-		padding: 20,
-		borderRadius: 10,
 	},
 	buttonsContainer: {
 		flexDirection: 'row',
 		width: '100%',
-		justifyContent: 'center',
+		justifyContent: 'space-between',
 		paddingHorizontal: 10,
 	},
 });
