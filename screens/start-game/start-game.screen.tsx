@@ -16,10 +16,31 @@ export interface StartGameScreenProps {}
 
 const StartGameScreen: React.FunctionComponent<StartGameScreenProps> = () => {
 	const [enteredValue, setEnteredValue] = useState('');
+	const [confirmed, setConfirmed] = useState(false);
+	const [selectedNumber, setSelectedNumber] = useState<number>();
 
 	const numberInputHandler = (inputText: string) => {
 		setEnteredValue(inputText.replace(/[^0-9]/g, ''));
 	};
+
+	const resetInputHandler = () => {
+		setEnteredValue('');
+		setConfirmed(false);
+	};
+
+	const confirmInputHandler = () => {
+		const chosenNumber = parseInt(enteredValue);
+		if (chosenNumber === NaN || chosenNumber <= 0 || chosenNumber > 99)
+			return;
+		setConfirmed(true);
+		setSelectedNumber(chosenNumber);
+		setEnteredValue('');
+	};
+
+	let confirmedOutput;
+	if (confirmed) {
+		confirmedOutput = <Text>Chosen number: {selectedNumber}</Text>;
+	}
 
 	return (
 		<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -39,18 +60,19 @@ const StartGameScreen: React.FunctionComponent<StartGameScreenProps> = () => {
 							<Button
 								title='Reset'
 								color={Colors.accent}
-								onPress={() => {}}
+								onPress={resetInputHandler}
 							/>
 						</View>
 						<View style={styles.button}>
 							<Button
 								title='Confirm'
 								color={Colors.primary}
-								onPress={() => {}}
+								onPress={confirmInputHandler}
 							/>
 						</View>
 					</View>
 				</Card>
+				{confirmedOutput}
 			</View>
 		</TouchableWithoutFeedback>
 	);
