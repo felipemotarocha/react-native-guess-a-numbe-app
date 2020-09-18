@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { View, StyleSheet, Text, TextInput, Button } from 'react-native';
+import { View, StyleSheet, Text, Button } from 'react-native';
 
 import Card from '../../components/card/card.component';
+import Input from '../../components/input/input.component';
 import Colors from '../../constants/colors';
 
 export interface StartGameScreenProps {}
@@ -12,7 +13,11 @@ const StartGameScreen: React.FunctionComponent<StartGameScreenProps> = () => {
 			<Text style={styles.title}>Start a New Game!</Text>
 			<Card passedStyles={styles.inputsContainer}>
 				<Text>Select a Number</Text>
-				<TextInput />
+				<Input
+					additionalStyles={styles.input}
+					keyboardType='number-pad'
+					maxLength={2}
+				/>
 				<View style={styles.buttonsContainer}>
 					<View style={styles.button}>
 						<Button
@@ -57,6 +62,10 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		width: 100,
+	},
+	input: {
+		width: 50,
+		textAlign: 'center',
 	},
 });
 
